@@ -7,7 +7,10 @@ project (${PROJECT_NAME})
 set(CMAKE_CXX_STANDARD 20)
 
 # SOURCES
-set (SOURCES src/hybrid_map.cpp)
+set (SOURCES 
+    src/hybrid_map.cpp
+    src/hash.cpp 
+    )
 
 # SETUP LIBRARY
 add_library(${PROJECT_NAME} ${SOURCES})
