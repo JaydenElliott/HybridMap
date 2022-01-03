@@ -1,4 +1,5 @@
 #include "hash.cpp"
+#include <utility>
 #include <vector>
 
 /**
@@ -8,10 +9,10 @@
  * \tparam T: Value type stored in map. Must be of type (Key, Value)
  *         S: Hash-map capacity (can be altered post-init)
  *         F: Pointer to hash function
- *         I: Hash function input type (e.g. uint_8, int, double)
+ *         K: Hash function key type
  *
  */
-template<typename T, size_t S, typename F, typename I>
+template<typename T, size_t S, typename F, typename K>
 struct HybridMap
 {
 
@@ -24,7 +25,7 @@ public:
 
 private:
   /// Pointer to the hashmap in memory
-  Hash<T>* m_data[S];
+  Hash<K, T>* m_data[S];
 
   /// Number of elements in the hashmap
   size_t m_size = 0;
@@ -35,7 +36,7 @@ private:
   /// Reallocates the hashmap with the size new_size
   void realloc(const size_t new_size)
   {
-    Hash<T>* new_data = new T[new_size];
+    Hash<K, T>* new_data = new T[new_size];
 
     if (new_size < m_size)
     {
@@ -50,34 +51,31 @@ private:
     m_capacity = new_size;
   }
 
-  /**
-   * \brief Obtains value at hash
-   */
-  Hash<T> operator[](const size_t idx) const
+  Hash<K, T> operator[](const K key) const
   {
-    return m_data[idx];
-    // need to do collision checks here
-  }
-
-  /// Returns value at map index 'idx' with bounds chec
-  Hash<T> at(const size_t key) const
-  {
-    if (idx > S)
-      throw std::out_of_range("Index out of range");
-
-    // need to do collision checks
-    return m_data[idx];
+    auto idx = F(key);
+    while (key != m_data[idx].first)
+    {
+      if (idx > S)
+      {
+        throw std::out_of_range("Index out of range");
+      }
+      idx++;
+    }
+    return m_data[idx].second;
   }
 
   /**
    *\brief Inserts a value/object into the hashmap using
    * the hash function provided on intialisation
    */
-  void insert(const I input, const T value)
+  void insert(const K key, const T value)
   {
-    auto idx = F(input);
-    while
-      m_data[idx]{idx++};
-    m_data[idx] = value;
+    auto idx = F(key);
+    while (m_data[idx])
+    {
+      idx++;
+    };
+    m_data[idx] = std::pair<K, T>(key, value);
   }
 };
