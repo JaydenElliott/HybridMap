@@ -1,8 +1,8 @@
-template <typename T>
-struct Hash {
+template<typename T>
+struct Hash
+{
 
 private:
-  int hash; 
-  T* data; // make this 8 bytes somehow
+  size_t key;  // should this be templated too?
+  T* data;     // make this 8 bytes somehow
 };
-
