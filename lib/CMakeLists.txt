@@ -1,8 +1,8 @@
 # SOURCES
 set (SOURCES 
-    HybridMap.cpp
-    Hash.cpp 
+    src/HybridMap.h
+    src/Hash.cpp 
     )
 
 # SETUP LIBRARY
-add_library(${LIB_NAME} SHARED ${SOURCES})
+add_library(HybridMap SHARED ${SOURCES})

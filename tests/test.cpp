@@ -1,4 +1,4 @@
-#include <HybridMap/HybridMap.cpp>
+#include <HybridMap.h>
 #include <gtest/gtest.h>
 
 TEST(MapTests, MapInit)

@@ -2,7 +2,7 @@ enable_testing()
 
 # SETUP TESTING EXECUTABLE
 add_executable(TESTING_EXE test.cpp)
-target_link_libraries(TESTING_EXE ${LIB_NAME})
+target_link_libraries(TESTING_EXE HybridMap)
 
 # LINK GOOGLETEST
 add_subdirectory(include/googletest)
