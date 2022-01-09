@@ -1,6 +1,6 @@
 # SOURCES
 set (SOURCES 
-    src/HybridMap.hpp
+    src/HybridMap.cpp
     src/Hash.cpp 
     )
 

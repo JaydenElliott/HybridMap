@@ -4,12 +4,15 @@
 
 /**
  * \brief A open-addressing / chaining hybrid
- *        hash map implementation
+ *        hash map implementation.
  *
- * \tparam T: Value type stored in map. Must be of type (Key, Value)
- *         S: Hash-map capacity (can be altered post-init)
- *         F: Pointer to hash function
- *         K: Hash function key type
+ *        Values in the hashmap are stored as
+ *        std::pair(K Key, T Value)
+ *
+ * \tparam T: Value type stored in map. Must be of type
+ * \tparam S: Hash-map capacity (can be altered post-init)
+ * \tparam F: Function type Example std::function<double()>(double)
+ * \tparam K: Data key type
  *
  */
 template<typename T, size_t S, typename F, typename K>
@@ -23,6 +26,12 @@ public:
     return S;
   }
 
+  /// Constructor
+  HybridMap(F f) : m_hash(f)
+  {
+  }
+  HybridMap() = delete;
+
 private:
   /// Pointer to the hashmap in memory
   Hash<K, T>* m_data[S];
@@ -32,6 +41,10 @@ private:
 
   /// Size of allocated block of memory
   size_t m_capacity = S;
+
+  /// Hash function
+  F m_hash;
+
 
   /// Reallocates the hashmap with the size new_size
   void realloc(const size_t new_size)
@@ -53,7 +66,7 @@ private:
 
   Hash<K, T> operator[](const K key) const
   {
-    auto idx = F(key);
+    auto idx = m_hash(key);
     while (key != m_data[idx].first)
     {
       if (idx > S)
@@ -71,7 +84,7 @@ private:
    */
   void insert(const K key, const T value)
   {
-    auto idx = F(key);
+    auto idx = m_hash(key);
     while (m_data[idx])
     {
       idx++;
