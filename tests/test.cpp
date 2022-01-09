@@ -1,9 +1,8 @@
-#include <HybridMap.h>
+#include <HybridMap.hpp>
 #include <gtest/gtest.h>
 
 TEST(MapTests, MapInit)
 {
-
   EXPECT_STRNE("hello", "world");
   // Expect equality.
   EXPECT_EQ(7 * 6, 42);

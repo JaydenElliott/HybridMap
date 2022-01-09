@@ -9,5 +9,4 @@ add_subdirectory(include/googletest)
 target_link_libraries(TESTING_EXE
     gtest
     gtest_main
-    ${LIB_NAME}
 )
