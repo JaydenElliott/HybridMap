@@ -1,6 +1,8 @@
 #include "Hash.cpp"
+#include <stdexcept>
 #include <utility>
 #include <vector>
+
 
 /**
  * \brief A open-addressing / chaining hybrid
@@ -11,11 +13,11 @@
  *
  * \tparam T: Value type stored in map. Must be of type
  * \tparam S: Hash-map capacity (can be altered post-init)
- * \tparam F: Function type Example std::function<double()>(double)
  * \tparam K: Data key type
+ * \tparam F: Function type Example std::function<double()>(double)
  *
  */
-template<typename T, size_t S, typename F, typename K>
+template<typename T, size_t S, typename K, typename F>
 struct HybridMap
 {
 
@@ -26,11 +28,9 @@ public:
     return S;
   }
 
-  /// Constructor
   HybridMap(F f) : m_hash(f)
   {
   }
-  HybridMap() = delete;
 
 private:
   /// Pointer to the hashmap in memory
