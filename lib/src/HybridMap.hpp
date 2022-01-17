@@ -64,6 +64,11 @@ public:
     m_capacity = new_size;
   }
 
+  /**
+   * \brief Indexing into the hash table will perform a hash
+   *        operation using 'key' and search for the corresponding
+   *        Hash.key value which contains the data
+   */
   Hash<K, T> operator[](const K key) const
   {
     double idx = m_hash(key);
