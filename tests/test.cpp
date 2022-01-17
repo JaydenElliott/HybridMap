@@ -1,4 +1,4 @@
-#include <HybridMap.cpp>
+#include <HybridMap.hpp>
 #include <gtest/gtest.h>
 
 double hashFuncTest(double test)

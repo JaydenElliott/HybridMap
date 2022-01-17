@@ -81,6 +81,9 @@ private:
   /**
    *\brief Inserts a value/object into the hashmap using
    * the hash function provided on intialisation
+   *
+   *
+   * // TODO: put in chaining logic (atm this is just open addresssing)
    */
   void insert(const K key, const T value)
   {
