@@ -9,7 +9,7 @@
  *        hash map implementation.
  *
  *        Values in the hashmap are stored as
- *        std::pair(K Key, T Value)
+ *        Hash(K Key, T Value)
  *
  * \tparam T: Value type stored in map. Must be of type
  * \tparam S: Hash-map capacity (can be altered post-init)
@@ -71,7 +71,7 @@ public:
    */
   Hash<K, T> operator[](const K key) const
   {
-    double idx = m_hash(key);
+    double idx = m_hash(key);  // TODO: update the data type later. Should be dependent on size of hashmap
     while (key != m_data[idx].first)
     {
       if (idx > S)

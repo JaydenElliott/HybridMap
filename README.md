@@ -1,16 +1,16 @@
 # HybridMap
 
-An attempt to build a hashmap that is faster than stl, albeit for a smaller set of use-cases.
+An attempt to build a hashmap that is faster than STL, albeit for a smaller set of use-cases.
+
+<br>
+
+Inspired by CppCon 2017: Carl Cook “When a Microsecond Is an Eternity: High Performance Trading Systems in C++
+ https://www.youtube.com/watch?v=NH1Tta7purM
 
 ## Assumptions
-- Hash is a double
 
 
 # Benchmarks
-- use perf and some other tools
 
 
-# Notes - del later
-## GCC unordered_map implementation
-https://github.com/gcc-mirror/gcc/blob/master/libstdc%2B%2B-v3/include/bits/unordered_map.h
-- note uses allocator<pair<T,H>>
+
