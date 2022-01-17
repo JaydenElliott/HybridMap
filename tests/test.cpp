@@ -1,17 +1,14 @@
 #include <HybridMap.hpp>
 #include <gtest/gtest.h>
 
-double hashFuncTest(double test)
+int hashFuncTest(double test)
 {
   return test;
 }
 TEST(MapTests, MapInit)
 {
-  // auto hashFunction = [](double key) { return key; };
-  HybridMap map = HybridMap<double, 1000, double, std::function<double(double)>>(hashFuncTest);
-  EXPECT_STRNE("hello", "world");
-  // Expect equality.
-  EXPECT_EQ(7 * 6, 42);
+  HybridMap map = HybridMap<std::string, 1000, double, std::function<double(double)>>(hashFuncTest);
+  map.insert(1000, "testing");
 }
 
 int main(int argc, char** argv)

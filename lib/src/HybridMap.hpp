@@ -21,20 +21,10 @@ template<typename T, size_t S, typename K, typename F>
 struct HybridMap
 {
 
-public:
-  /// Returns the number of values stored in the map
-  constexpr int Size() const
-  {
-    return S;
-  }
-
-  HybridMap(F f) : m_hash(f)
-  {
-  }
 
 private:
   /// Pointer to the hashmap in memory
-  Hash<K, T>* m_data[S];
+  Hash<K, T> m_data[S];
 
   /// Number of elements in the hashmap
   size_t m_size = 0;
@@ -45,6 +35,16 @@ private:
   /// Hash function
   F m_hash;
 
+public:
+  /// Returns the number of values stored in the map
+  constexpr int Size() const
+  {
+    return S;
+  }
+
+  HybridMap(F f) : m_hash(f)
+  {
+  }
 
   /// Reallocates the hashmap with the size new_size
   void realloc(const size_t new_size)
@@ -66,7 +66,7 @@ private:
 
   Hash<K, T> operator[](const K key) const
   {
-    auto idx = m_hash(key);
+    double idx = m_hash(key);
     while (key != m_data[idx].first)
     {
       if (idx > S)
@@ -85,13 +85,13 @@ private:
    *
    * // TODO: put in chaining logic (atm this is just open addresssing)
    */
-  void insert(const K key, const T value)
+  void insert(K key, T value)
   {
-    auto idx = m_hash(key);
-    while (m_data[idx])
+    int idx = m_hash(key);
+    while (m_data[idx].data)
     {
       idx++;
     };
-    m_data[idx] = std::pair<K, T>(key, value);
+    m_data[idx] = Hash<K, T>(key, &value);
   }
 };

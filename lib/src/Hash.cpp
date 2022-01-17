@@ -1,8 +1,16 @@
 template<typename K, typename T>
 struct Hash
 {
-
-private:
+public:
   K key;    // need to make this less than 8 bytes
-  T* data;  // make this 8 bytes somehow
+  T* data;  // make this 8 bytes
+
+
+  Hash(K k, T* d) : key(k), data(d)
+  {
+  }
+
+  Hash() : key(0), data(nullptr)
+  {
+  }
 };
