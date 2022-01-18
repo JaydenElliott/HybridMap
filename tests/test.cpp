@@ -1,14 +1,20 @@
 #include <HybridMap.hpp>
 #include <gtest/gtest.h>
+#include <iostream>
 
 int hashFuncTest(double test)
 {
   return test;
 }
+
 TEST(MapTests, MapInit)
 {
-  HybridMap map = HybridMap<std::string, 1000, double, std::function<double(double)>>(hashFuncTest);
-  map.insert(1000, "testing");
+  HybridMap map = HybridMap<std::string, 1001, double, std::function<double(double)>>(hashFuncTest);
+  std::string test = "testing";
+  map.insert(9, test);
+  // map.printMap();
+  ASSERT_EQ(*map[9], "testing");
+  // std::cout << map[1000].data;
 }
 
 int main(int argc, char** argv)

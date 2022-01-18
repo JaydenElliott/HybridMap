@@ -1,8 +1,8 @@
-#include "Hash.cpp"
+#include "HybridT.cpp"
+#include <iostream>
 #include <stdexcept>
 #include <utility>
 #include <vector>
-
 
 /**
  * \brief A open-addressing / chaining hybrid
@@ -20,7 +20,6 @@
 template<typename T, size_t S, typename K, typename F>
 struct HybridMap
 {
-
 
 private:
   /// Pointer to the hashmap in memory
@@ -42,8 +41,20 @@ public:
     return S;
   }
 
+
   HybridMap(F f) : m_hash(f)
   {
+  }
+
+  /// Iterates through the map, printing the data portion
+  /// of the Hash
+  void printMap()
+  {
+    std::cout << "Printing" << '\n';
+    for (auto i : m_data)
+    {
+      std::cout << m_data->data << ", ";
+    }
   }
 
   /// Reallocates the hashmap with the size new_size
@@ -64,15 +75,16 @@ public:
     m_capacity = new_size;
   }
 
+
   /**
    * \brief Indexing into the hash table will perform a hash
    *        operation using 'key' and search for the corresponding
    *        Hash.key value which contains the data
    */
-  Hash<K, T> operator[](const K key) const
+  T* operator[](const K key) const
   {
-    double idx = m_hash(key);  // TODO: update the data type later. Should be dependent on size of hashmap
-    while (key != m_data[idx].first)
+    int idx = m_hash(key);  // TODO: update the data type later. Should be dependent on size of hashmap
+    while (key != m_data[idx].key)
     {
       if (idx > S)
       {
@@ -80,17 +92,15 @@ public:
       }
       idx++;
     }
-    return m_data[idx].second;
+
+    return m_data[idx].data;
   }
 
   /**
    *\brief Inserts a value/object into the hashmap using
    * the hash function provided on intialisation
-   *
-   *
-   * // TODO: put in chaining logic (atm this is just open addresssing)
    */
-  void insert(K key, T value)
+  void insert(K key, T& value)
   {
     int idx = m_hash(key);
     while (m_data[idx].data)
