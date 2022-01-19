@@ -109,4 +109,14 @@ public:
     };
     m_data[idx] = Hash<K, T>(std::move(key), std::move(value));
   }
+
+  void insert(K key, T& value)
+  {
+    int idx = m_hash(key);
+    while (m_data[idx].data)
+    {
+      idx++;
+    };
+    m_data[idx] = Hash<K, T>(std::move(key), std::move(value));
+  }
 };
