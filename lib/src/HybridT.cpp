@@ -7,7 +7,7 @@ public:
   T* data;  // make this 8 bytes
 
 
-  Hash(K k, T* d) : key(k), data(d)
+  Hash(K&& k, T&& d) : key(std::move(k)), data(std::move(&d))
   {
   }
 
