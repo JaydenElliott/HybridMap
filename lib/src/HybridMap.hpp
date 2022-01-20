@@ -1,4 +1,4 @@
-#include "HybridT.cpp"
+#include "Entry.cpp"
 #include <iostream>
 #include <stdexcept>
 #include <utility>
@@ -23,7 +23,7 @@ struct HybridMap
 
 private:
   /// Pointer to the hashmap in memory
-  Hash<K, T> m_data[S];
+  Entry<K, T> m_data[S];
 
   /// Number of elements in the hashmap
   size_t m_size = 0;
@@ -107,7 +107,7 @@ public:
     {
       idx++;
     };
-    m_data[idx] = Hash<K, T>(std::move(key), std::move(value));
+    m_data[idx] = Entry<K, T>(std::move(key), std::move(value));
   }
 
   void insert(K key, T& value)
@@ -117,6 +117,6 @@ public:
     {
       idx++;
     };
-    m_data[idx] = Hash<K, T>(std::move(key), std::move(value));
+    m_data[idx] = Entry<K, T>(std::move(key), std::move(value));
   }
 };
